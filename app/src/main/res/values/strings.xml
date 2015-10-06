@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Furniture Mart</string>
+    
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is invalid</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="prompt_user_id">User ID</string>
+    <string name="store_id">Store ID</string>
+    <string-array name="stores_array">
+        <item>Oak</item>
+        <item>Cedar</item>
+        <item>Chestnut</item>
+        <item>Pine</item>
+    </string-array>
+    <string name="title_activity_order_detail">Order Details</string>
+    <string name="prompt_order_id">Order Id</string>
+    <string name="prompt_order_date">Order Date</string>
+    <string name="prompt_order_status">Status</string>
+    <string name="prompt_total_amount">Total Amount</string>
+    <string name="prompt_customer_details">Customer Details</string>
+    <string name="action_display_order">Display</string>
+    <string name="text_store_id">Store Id</string>
+    <string name="title_activity_order_status">Order Status</string>
+</resources>
