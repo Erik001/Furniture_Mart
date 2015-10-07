@@ -61,10 +61,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/order_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:completionThreshold="1"
                     android:hint="@string/prompt_order_status"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -96,7 +97,9 @@
                     android:hint="@string/prompt_total_amount"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:inputType="numberDecimal"/>
+                    android:inputType="numberDecimal"
+                    android:text="$0.00"
+                    android:digits="0123456789"/>
 
             </android.support.design.widget.TextInputLayout>
 

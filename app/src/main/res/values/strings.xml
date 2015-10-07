@@ -21,6 +21,11 @@
         <item>Chestnut</item>
         <item>Pine</item>
     </string-array>
+    <string-array name="status_array">
+        <item>Canceled</item>
+        <item>In Progress</item>
+        <item>Delivered</item>
+    </string-array>
     <string name="title_activity_order_detail">Order Details</string>
     <string name="prompt_order_id">Order Id</string>
     <string name="prompt_order_date">Order Date</string>
@@ -30,4 +35,5 @@
     <string name="action_display_order">Display</string>
     <string name="text_store_id">Store Id</string>
     <string name="title_activity_order_status">Order Status</string>
+    <string name="option_clear">Clear</string>
 </resources>

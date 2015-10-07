@@ -7,16 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.treesoftware.furnituremart.data.Order;
+import com.treesoftware.furnituremart.utils.CurrencyTextWatcher;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,13 +31,14 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     public static final String ORDERS_BUNDLE = "ordersBundle";
     private EditText mOrderId;
     private EditText mOrderDate;
-    private EditText mOrderStatus;
+    private AutoCompleteTextView mOrderStatus;
     private EditText mOrderCustomerDetails;
     private EditText mOrderTotalAmount;
     private SimpleDateFormat dateFormatter;
     private DatePickerDialog orderDatePickerDialog;
     private TextView storeIdView;
     private String storeId;
+    private String[] status;
 
     public static ArrayList<Order> orderList = new ArrayList<Order>();
 
@@ -57,9 +61,15 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         mOrderDate = (EditText) findViewById(R.id.order_date);
         mOrderDate.setInputType(InputType.TYPE_NULL);
         setDateTimeField();
-        mOrderStatus = (EditText) findViewById(R.id.order_status);
+        mOrderStatus = (AutoCompleteTextView) findViewById(R.id.order_status);
+
+        status = getResources().getStringArray(R.array.status_array);
+        addStatusToAutoComplete(status);
+
         mOrderCustomerDetails = (EditText) findViewById(R.id.order_customer_details);
         mOrderTotalAmount = (EditText) findViewById(R.id.order_total_amount);
+
+        mOrderTotalAmount.addTextChangedListener(new CurrencyTextWatcher(mOrderTotalAmount));
 
 
         Button mDisplayButton = (Button) findViewById(R.id.display_button);
@@ -96,14 +106,36 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        Intent intent = null;
+        switch (item.getItemId()) {
+            case R.id.action_clear:
+                clearFields();
+                break;
 
-        if (id == android.R.id.home) {
-            finish();
+            case android.R.id.home:
+                finish();
+                break;
+
+            default:
+                break;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void clearFields() {
+        mOrderId.setText("");
+        mOrderStatus.setText("");
+        mOrderDate.setText("");
+        mOrderCustomerDetails.setText("");
+        mOrderTotalAmount.setText("$0.00");
     }
 
     /**
@@ -177,5 +209,14 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
             startActivity(orderStatusIntent);
         }
+    }
+
+    private void addStatusToAutoComplete(String[] stores) {
+        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        ArrayAdapter adapter =
+                new ArrayAdapter(OrderDetail.this,
+                        android.R.layout.simple_dropdown_item_1line, stores);
+
+        mOrderStatus.setAdapter(adapter);
     }
 }
